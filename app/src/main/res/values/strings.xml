@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CountBallsGame</string>
+    <string name="tvGameTitle">Count Ball Game</string>
+    <string name="tvGameMenu">Choose a difficulty:</string>
+    <string name="btEasyMode">Easy</string>
+    <string name="btMediumMode">Medium</string>
+    <string name="btHardGame">Hard</string>
+    <string name="readyMessage">Ready?</string>
+</resources>
