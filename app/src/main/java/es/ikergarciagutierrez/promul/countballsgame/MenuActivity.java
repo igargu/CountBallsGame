@@ -31,7 +31,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private void defineBTEasyModeListener() {
         btEasyMode.setOnClickListener(v -> {
-            // Suena pista de audio
+            // Suena pista de audio y cambiamos de activity cuando acaba
             Bundle bundle = new Bundle();
             bundle.putSerializable("gameMode", "easy");
             Intent intent = new Intent(this, GameActivity.class);
@@ -41,7 +41,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private void defineBTMediumModeListener() {
         btMediumMode.setOnClickListener(v -> {
-            // Suena pista de audio
+            // Suena pista de audio y cambiamos de activity cuando acaba
             Bundle bundle = new Bundle();
             bundle.putSerializable("gameMode", "medium");
             Intent intent = new Intent(this, GameActivity.class);
@@ -51,7 +51,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private void defineBTHardModeListener() {
         btHardMode.setOnClickListener(v -> {
-            // Suena pista de audio
+            // Suena pista de audio y cambiamos de activity cuando acaba
             Bundle bundle = new Bundle();
             bundle.putSerializable("gameMode", "hard");
             Intent intent = new Intent(this, GameActivity.class);

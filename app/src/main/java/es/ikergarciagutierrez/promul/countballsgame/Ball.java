@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class Circle extends View {
+public class Ball extends View {
 
     /**
      * Campos de la clase
@@ -28,7 +28,7 @@ public class Circle extends View {
      * @param context Contexto
      * @param attrs
      */
-    public Circle(Context context, AttributeSet attrs) {
+    public Ball(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         paint = new Paint();

@@ -3,6 +3,7 @@ package es.ikergarciagutierrez.promul.countballsgame;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.widget.TextView;
@@ -48,15 +49,31 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void easyMode() {
-
+        // Empezamos el juego
+        finishGame();
     }
 
     private void mediumMode() {
-
+        // Empezamos el juego
+        finishGame();
     }
 
     private void hardMode() {
+        // Empezamos el juego
+        finishGame();
+    }
 
+    private void finishGame() {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("gameResult", "");
+        Intent intent = new Intent(this, ResultActivity.class);
+        startActivity(intent);
     }
 
 }
+
+/*
+
+
+
+ */

@@ -8,4 +8,11 @@
     <string name="tvReadyMessage">Ready?</string>
     <string name="tvResult">How many balls were there?</string>
     <string name="etResultHint">0</string>
+    <string name="tvCorrectAnswer">Correct!</string>
+    <string name="tvAnswerMessage">There where x balls</string>
+    <string name="tvWrongAnswer">Incorrect!</string>
+    <string name="btContinue">Continue</string>
+    <string name="btCheckAnswer">Check answer</string>
+    <string name="errorToast">Enter your answer</string>
+    <string name="finishToast">Thanks for playing!</string>
 </resources>
