@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 public class MenuActivity extends AppCompatActivity {
@@ -14,7 +15,6 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
         initialize();
     }
 
@@ -30,18 +30,32 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void defineBTEasyModeListener() {
-        // Suena pista de audio
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
+        btEasyMode.setOnClickListener(v -> {
+            // Suena pista de audio
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("gameMode", "easy");
+            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent, bundle);
+        });
     }
 
     private void defineBTMediumModeListener() {
-        // Suena pista de audio
-
+        btMediumMode.setOnClickListener(v -> {
+            // Suena pista de audio
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("gameMode", "medium");
+            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void defineBTHardModeListener() {
-        // Suena pista de audio
-
+        btHardMode.setOnClickListener(v -> {
+            // Suena pista de audio
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("gameMode", "hard");
+            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);
+        });
     }
 }

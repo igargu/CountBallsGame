@@ -5,5 +5,7 @@
     <string name="btEasyMode">Easy</string>
     <string name="btMediumMode">Medium</string>
     <string name="btHardGame">Hard</string>
-    <string name="readyMessage">Ready?</string>
+    <string name="tvReadyMessage">Ready?</string>
+    <string name="tvResult">How many balls were there?</string>
+    <string name="etResultHint">0</string>
 </resources>
