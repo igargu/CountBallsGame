@@ -22,7 +22,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private Button btContinue;
 
-    String result;
+    private String result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +61,21 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void defineContinueButtonListener() {
-        Toast.makeText(this, R.string.finishToast, Toast.LENGTH_SHORT).show();
-        finish();
+        btContinue.setOnClickListener(v -> {
+            Toast.makeText(this, R.string.finishToast, Toast.LENGTH_SHORT).show();
+            finish();
+        });
     }
 
     private void showAnswer() {
+        result = getIntent().getStringExtra("gameResult");
+        tvAnswerMessage.setText("");
+
         tvAnswerMessage.setVisibility(View.VISIBLE);
         btContinue.setVisibility(View.VISIBLE);
-        if (etResult.getText().equals(result)) {
+
+        String answer = etResult.getText().toString();
+        if (answer.contains(result)) {
             tvCorrectAnswer.setVisibility(View.VISIBLE);
         } else {
             tvWrongAnswer.setVisibility(View.VISIBLE);
