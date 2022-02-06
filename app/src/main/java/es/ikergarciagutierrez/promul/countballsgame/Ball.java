@@ -32,7 +32,7 @@ public class Ball extends View {
         super(context, attrs);
 
         paint = new Paint();
-        paint.setColor(Color.RED);
+        paint.setColor(Color.parseColor("FF3333"));
     }
 
     /**

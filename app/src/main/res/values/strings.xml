@@ -15,4 +15,10 @@
     <string name="btCheckAnswer">Check answer</string>
     <string name="errorToast">Enter your answer</string>
     <string name="finishToast">Thanks for playing!</string>
+    <string name="tvRedBalls">Red balls:</string>
+    <string name="tvGreenBalls">Green Balls:</string>
+    <string name="tvBlueBalls">Blue Balls:</string>
+    <string name="tvRedBallsAnswer">Reb Balls: x</string>
+    <string name="tvGreenBallsAnswer">Green Balls: x</string>
+    <string name="tvBlueBallsAnswer">Blue Balls: x</string>
 </resources>
