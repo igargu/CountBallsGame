@@ -87,8 +87,12 @@ public class ResultActivity extends AppCompatActivity {
         if (redBallsAnswer.contains(redBallsResult) && greenBallsAnswer.contains(greenBallsResult)
                 && blueBallsAnswer.contains(blueBallsResult)) {
             tvCorrectAnswer.setVisibility(View.VISIBLE);
+            //MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.difficulty_selected_sound);
+            //mediaPlayer.start();
         } else {
             tvWrongAnswer.setVisibility(View.VISIBLE);
+            //MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.difficulty_selected_sound);
+            //mediaPlayer.start();
         }
 
         String redBallsMessage = tvRedBallsAnswer.getText().toString();
@@ -99,4 +103,5 @@ public class ResultActivity extends AppCompatActivity {
         tvGreenBallsAnswer.setText(greenBallsMessage.replace("x", greenBallsAnswer));
         tvBlueBallsAnswer.setText(blueBallsMessage.replace("x", blueBallsAnswer));
     }
+
 }

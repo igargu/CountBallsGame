@@ -3,6 +3,7 @@ package es.ikergarciagutierrez.promul.countballsgame;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -31,6 +32,7 @@ public class MenuActivity extends AppCompatActivity {
     private void defineBTEasyModeListener() {
         btEasyMode.setOnClickListener(v -> {
             // Suena pista de audio y cambiamos de activity cuando acaba
+            difficultySelectedSound();
             Intent intent = new Intent(this, GameActivity.class);
             intent.putExtra("gameMode", "easy");
             startActivity(intent);
@@ -40,6 +42,7 @@ public class MenuActivity extends AppCompatActivity {
     private void defineBTMediumModeListener() {
         btMediumMode.setOnClickListener(v -> {
             // Suena pista de audio y cambiamos de activity cuando acaba
+            difficultySelectedSound();
             Intent intent = new Intent(this, GameActivity.class);
             intent.putExtra("gameMode", "medium");
             startActivity(intent);
@@ -49,9 +52,15 @@ public class MenuActivity extends AppCompatActivity {
     private void defineBTHardModeListener() {
         btHardMode.setOnClickListener(v -> {
             // Suena pista de audio y cambiamos de activity cuando acaba
+            difficultySelectedSound();
             Intent intent = new Intent(this, GameActivity.class);
             intent.putExtra("gameMode", "hard");
             startActivity(intent);
         });
+    }
+
+    private void difficultySelectedSound() {
+        //MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.difficulty_selected_sound);
+        //mediaPlayer.start();
     }
 }
