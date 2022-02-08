@@ -18,7 +18,7 @@
     <string name="tvRedBalls">Red balls:</string>
     <string name="tvGreenBalls">Green Balls:</string>
     <string name="tvBlueBalls">Blue Balls:</string>
-    <string name="tvRedBallsAnswer">Reb Balls: x</string>
+    <string name="tvRedBallsAnswer">Red Balls: x</string>
     <string name="tvGreenBallsAnswer">Green Balls: x</string>
     <string name="tvBlueBallsAnswer">Blue Balls: x</string>
 </resources>

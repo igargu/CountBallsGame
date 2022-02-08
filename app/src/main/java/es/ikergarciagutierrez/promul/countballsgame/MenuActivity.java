@@ -60,7 +60,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     private void difficultySelectedSound() {
-        //MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.difficulty_selected_sound);
-        //mediaPlayer.start();
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.difficulty_selected_sound);
+        mediaPlayer.start();
     }
 }

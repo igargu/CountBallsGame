@@ -14,13 +14,13 @@ public class Ball extends View {
      */
     private Paint paint; // Objeto paint para dibujar el circulo
 
-    private static final int RADIO = 100; // Radio del circulo
+    private static final int RADIO = 65; // Radio del circulo
 
     private int centroX; // Posición en el eje X del círculo
     private int centroY; // Posición en el eje Y del círculo
 
-    private int velocidadX = 50; // Velocidad en el eje X
-    private int velocidadY = 50; // Velocidad en el eje Y
+    private int velocidadX; // Velocidad en el eje X
+    private int velocidadY; // Velocidad en el eje Y
 
     /**
      * Constructor para el circulo
@@ -32,7 +32,6 @@ public class Ball extends View {
         super(context, attrs);
 
         paint = new Paint();
-        paint.setColor(Color.parseColor("FF3333"));
     }
 
     /**
@@ -47,6 +46,15 @@ public class Ball extends View {
     protected void onSizeChanged(int w, int h, int oldW, int oldH) {
         centroX = w / 2;
         centroY = h / 2;
+    }
+
+    public void setColor(String color) {
+        paint.setColor(Color.parseColor(color));
+    }
+
+    public void setVelocidad(int ejeX, int ejeY) {
+        velocidadX = ejeX;
+        velocidadY = ejeY;
     }
 
     /**
@@ -86,7 +94,7 @@ public class Ball extends View {
         }
 
         canvas.drawCircle(centroX, centroY, RADIO, paint);
-        postInvalidateDelayed(100);
+        postInvalidateDelayed(1);
 
     }
 

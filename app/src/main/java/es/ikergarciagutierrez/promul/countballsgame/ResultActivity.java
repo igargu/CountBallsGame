@@ -2,6 +2,7 @@ package es.ikergarciagutierrez.promul.countballsgame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,8 +13,8 @@ import android.widget.Toast;
 
 public class ResultActivity extends AppCompatActivity {
 
-    private TextView tvResult, tvCorrectAnswer, tvWrongAnswer, tvAnswerMessage, tvRedBallsAnswer,
-            tvGreenBallsAnswer, tvBlueBallsAnswer;
+    private TextView tvResult, tvRedBalls, tvGreenBalls, tvBlueBalls, tvCorrectAnswer,
+            tvWrongAnswer, tvAnswerMessage, tvRedBallsAnswer, tvGreenBallsAnswer, tvBlueBallsAnswer;
     private EditText etRedBallsResult, etGreenBallsResult, etBlueBallsResult;
     private Button btCheckAnswer, btContinue;
     private String redBallsResult, greenBallsResult, blueBallsResult;
@@ -27,6 +28,9 @@ public class ResultActivity extends AppCompatActivity {
 
     private void initialize() {
         tvResult = findViewById(R.id.tvResult);
+        tvRedBalls = findViewById(R.id.tvRedBalls);
+        tvGreenBalls = findViewById(R.id.tvGreenBalls);
+        tvBlueBalls = findViewById(R.id.tvBlueBalls);
         etRedBallsResult = findViewById(R.id.etRedBallsResult);
         etGreenBallsResult = findViewById(R.id.etGreenBallsResult);
         etBlueBallsResult = findViewById(R.id.etBlueBallsResult);
@@ -52,6 +56,9 @@ public class ResultActivity extends AppCompatActivity {
                 Toast.makeText(this, R.string.errorToast, Toast.LENGTH_SHORT).show();
             } else {
                 tvResult.setVisibility(View.GONE);
+                tvRedBalls.setVisibility(View.GONE);
+                tvGreenBalls.setVisibility(View.GONE);
+                tvBlueBalls.setVisibility(View.GONE);
                 etRedBallsResult.setVisibility(View.GONE);
                 etGreenBallsResult.setVisibility(View.GONE);
                 etBlueBallsResult.setVisibility(View.GONE);
@@ -87,12 +94,12 @@ public class ResultActivity extends AppCompatActivity {
         if (redBallsAnswer.contains(redBallsResult) && greenBallsAnswer.contains(greenBallsResult)
                 && blueBallsAnswer.contains(blueBallsResult)) {
             tvCorrectAnswer.setVisibility(View.VISIBLE);
-            //MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.difficulty_selected_sound);
-            //mediaPlayer.start();
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.correct_answer_sound);
+            mediaPlayer.start();
         } else {
             tvWrongAnswer.setVisibility(View.VISIBLE);
-            //MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.difficulty_selected_sound);
-            //mediaPlayer.start();
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.wrong_answer_sound);
+            mediaPlayer.start();
         }
 
         String redBallsMessage = tvRedBallsAnswer.getText().toString();

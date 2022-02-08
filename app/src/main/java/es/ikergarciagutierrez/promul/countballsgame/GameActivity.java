@@ -8,6 +8,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -15,12 +16,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GameActivity extends AppCompatActivity {
 
-    private ConstraintLayout layGameActivity;
-    private AttributeSet attributeSet;
+    private int[] balls = {R.id.ball1, R.id.ball2, R.id.ball3, R.id.ball4, R.id.ball5, R.id.ball6,
+            R.id.ball7, R.id.ball8, R.id.ball9, R.id.ball10, R.id.ball11, R.id.ball12};
     private ObjectAnimator animation;
     private TextView tvReadyMessage;
     private int numBalls;
@@ -38,7 +41,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void initialize() {
-        layGameActivity = (ConstraintLayout) findViewById(R.id.layGameActivity);
         readyMessage();
     }
 
@@ -52,6 +54,7 @@ public class GameActivity extends AppCompatActivity {
         animation = ObjectAnimator.ofFloat(tvReadyMessage, "translationY", finalPosition);
         animation.setDuration(5000);
         animation.start();
+        gameLevelSound();
         // Al terminar el mensaje
         animation.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -79,27 +82,18 @@ public class GameActivity extends AppCompatActivity {
         int redBalls = 0, greenBalls = 0, blueBalls = 0;
 
         // Empezamos el juego
-        gameLevelSound();
-
-        int[] balls = {R.id.ball1, R.id.ball2, R.id.ball3, R.id.ball4, R.id.ball5, R.id.ball6,
-                R.id.ball7, R.id.ball8, R.id.ball9, R.id.ball10, R.id.ball11, R.id.ball12};
+        //gameLevelSound();
 
         for (int i = 0; i < numBalls; i++) {
 
             int color = ThreadLocalRandom.current().nextInt(0, 3);
             String ballColor = colorBalls[color];
-
-            ImageView ball = findViewById(balls[i]);
-            ball.setColorFilter(Color.parseColor(ballColor));
+            Ball ball = findViewById(balls[i]);
             ball.setVisibility(View.VISIBLE);
-            DisplayMetrics displayMetrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-            int finalPositionx = displayMetrics.widthPixels;
-            int finalPositiony = displayMetrics.heightPixels;
-            animation = ObjectAnimator.ofFloat(ball, "translationY", finalPositiony);
-            //animation = ObjectAnimator.ofFloat(ball, "translationY", finalPositiony);
-            animation.setDuration(5000);
-            animation.start();
+            ball.setColor(ballColor);
+            int ejeX = ThreadLocalRandom.current().nextInt(0, 51);
+            int ejeY = ThreadLocalRandom.current().nextInt(0, 51);
+            ball.setVelocidad(ejeX, ejeY);
 
             switch (color) {
                 case 0:
@@ -115,7 +109,13 @@ public class GameActivity extends AppCompatActivity {
 
         }
 
-        // finishGame(String.valueOf(redBalls), String.valueOf(greenBalls), String.valueOf(blueBalls));
+        int finalRedBalls = redBalls, finalGreenBalls = greenBalls, finalBlueBalls = blueBalls;
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                finishGame(String.valueOf(finalRedBalls), String.valueOf(finalGreenBalls), String.valueOf(finalBlueBalls));
+            }
+        }, 5000);
 
     }
 
@@ -124,16 +124,18 @@ public class GameActivity extends AppCompatActivity {
         int redBalls = 0, greenBalls = 0, blueBalls = 0;
 
         // Empezamos el juego
-        gameLevelSound();
+        //gameLevelSound();
 
         for (int i = 0; i < numBalls; i++) {
 
             int color = ThreadLocalRandom.current().nextInt(0, 3);
             String ballColor = colorBalls[color];
-
-            /*Ball ball = new Ball(this, attributeSet);
-            ball.setBackgroundColor(Color.parseColor(ballColor));
-            layGameActivity.addView(ball);*/
+            Ball ball = findViewById(balls[i]);
+            ball.setVisibility(View.VISIBLE);
+            ball.setColor(ballColor);
+            int ejeX = ThreadLocalRandom.current().nextInt(20, 71);
+            int ejeY = ThreadLocalRandom.current().nextInt(20, 71);
+            ball.setVelocidad(ejeX, ejeY);
 
             switch (color) {
                 case 0:
@@ -148,7 +150,14 @@ public class GameActivity extends AppCompatActivity {
             }
 
         }
-        finishGame(String.valueOf(redBalls), String.valueOf(greenBalls), String.valueOf(blueBalls));
+
+        int finalRedBalls = redBalls, finalGreenBalls = greenBalls, finalBlueBalls = blueBalls;
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                finishGame(String.valueOf(finalRedBalls), String.valueOf(finalGreenBalls), String.valueOf(finalBlueBalls));
+            }
+        }, 10000);
     }
 
     private void hardMode() {
@@ -156,16 +165,18 @@ public class GameActivity extends AppCompatActivity {
         int redBalls = 0, greenBalls = 0, blueBalls = 0;
 
         // Empezamos el juego
-        gameLevelSound();
+        //gameLevelSound();
 
         for (int i = 0; i < numBalls; i++) {
 
             int color = ThreadLocalRandom.current().nextInt(0, 3);
             String ballColor = colorBalls[color];
-
-            /*Ball ball = new Ball(this, attributeSet);
-            ball.setBackgroundColor(Color.parseColor(ballColor));
-            layGameActivity.addView(ball);*/
+            Ball ball = findViewById(balls[i]);
+            ball.setVisibility(View.VISIBLE);
+            ball.setColor(ballColor);
+            int ejeX = ThreadLocalRandom.current().nextInt(40, 91);
+            int ejeY = ThreadLocalRandom.current().nextInt(30, 81);
+            ball.setVelocidad(ejeX, ejeY);
 
             switch (color) {
                 case 0:
@@ -180,12 +191,19 @@ public class GameActivity extends AppCompatActivity {
             }
 
         }
-        finishGame(String.valueOf(redBalls), String.valueOf(greenBalls), String.valueOf(blueBalls));
+
+        int finalRedBalls = redBalls, finalGreenBalls = greenBalls, finalBlueBalls = blueBalls;
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                finishGame(String.valueOf(finalRedBalls), String.valueOf(finalGreenBalls), String.valueOf(finalBlueBalls));
+            }
+        }, 10000);
     }
 
     private void gameLevelSound() {
-        //MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.difficulty_selected_sound);
-        //mediaPlayer.start();
+        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.game_level_sound);
+        mediaPlayer.start();
     }
 
     private void finishGame(String redBalls, String greenBalls, String blueBalls) {
