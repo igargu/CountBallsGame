@@ -7,9 +7,13 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MenuActivity extends AppCompatActivity {
 
     private Button btEasyMode, btMediumMode, btHardMode;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,8 @@ public class MenuActivity extends AppCompatActivity {
         btMediumMode = findViewById(R.id.btMediumMode);
         btHardMode = findViewById(R.id.btHardMode);
 
+        mediaPlayer = MediaPlayer.create(this, R.raw.difficulty_selected_sound);
+
         defineBTEasyModeListener();
         defineBTMediumModeListener();
         defineBTHardModeListener();
@@ -32,35 +38,38 @@ public class MenuActivity extends AppCompatActivity {
     private void defineBTEasyModeListener() {
         btEasyMode.setOnClickListener(v -> {
             // Suena pista de audio y cambiamos de activity cuando acaba
-            difficultySelectedSound();
-            Intent intent = new Intent(this, GameActivity.class);
-            intent.putExtra("gameMode", "easy");
-            startActivity(intent);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(mediaPlayer -> {
+                Intent intent = new Intent(this, GameActivity.class);
+                intent.putExtra("gameMode", "easy");
+                startActivity(intent);
+            });
+
         });
     }
 
     private void defineBTMediumModeListener() {
         btMediumMode.setOnClickListener(v -> {
             // Suena pista de audio y cambiamos de activity cuando acaba
-            difficultySelectedSound();
-            Intent intent = new Intent(this, GameActivity.class);
-            intent.putExtra("gameMode", "medium");
-            startActivity(intent);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(mediaPlayer -> {
+                Intent intent = new Intent(this, GameActivity.class);
+                intent.putExtra("gameMode", "medium");
+                startActivity(intent);
+            });
+
         });
     }
 
     private void defineBTHardModeListener() {
         btHardMode.setOnClickListener(v -> {
             // Suena pista de audio y cambiamos de activity cuando acaba
-            difficultySelectedSound();
-            Intent intent = new Intent(this, GameActivity.class);
-            intent.putExtra("gameMode", "hard");
-            startActivity(intent);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(mediaPlayer -> {
+                Intent intent = new Intent(this, GameActivity.class);
+                intent.putExtra("gameMode", "hard");
+                startActivity(intent);
+            });
         });
-    }
-
-    private void difficultySelectedSound() {
-        MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.difficulty_selected_sound);
-        mediaPlayer.start();
     }
 }

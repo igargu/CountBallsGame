@@ -21,4 +21,6 @@
     <string name="tvRedBallsAnswer">Red Balls: x</string>
     <string name="tvGreenBallsAnswer">Green Balls: x</string>
     <string name="tvBlueBallsAnswer">Blue Balls: x</string>
+    <string name="btTakePhoto">Take photo</string>
+    <string name="contentDescription_ivRecordPhoto">ivRecordPhoto</string>
 </resources>

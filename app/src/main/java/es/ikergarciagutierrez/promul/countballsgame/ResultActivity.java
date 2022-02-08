@@ -1,13 +1,19 @@
 package es.ikergarciagutierrez.promul.countballsgame;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,8 +22,11 @@ public class ResultActivity extends AppCompatActivity {
     private TextView tvResult, tvRedBalls, tvGreenBalls, tvBlueBalls, tvCorrectAnswer,
             tvWrongAnswer, tvAnswerMessage, tvRedBallsAnswer, tvGreenBallsAnswer, tvBlueBallsAnswer;
     private EditText etRedBallsResult, etGreenBallsResult, etBlueBallsResult;
-    private Button btCheckAnswer, btContinue;
+    private Button btCheckAnswer, btTakePhoto, btContinue;
     private String redBallsResult, greenBallsResult, blueBallsResult;
+    private ImageView ivRecordPhoto;
+
+    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +51,12 @@ public class ResultActivity extends AppCompatActivity {
         tvRedBallsAnswer = findViewById(R.id.tvRedBallsAnswer);
         tvGreenBallsAnswer = findViewById(R.id.tvGreenBallsAnswer);
         tvBlueBallsAnswer = findViewById(R.id.tvBlueBallsAnswer);
+        btTakePhoto = findViewById(R.id.btTakePhoto);
         btContinue = findViewById(R.id.btContinue);
+        ivRecordPhoto = findViewById(R.id.ivRecordPhoto);
 
         defineCheckButtonListener();
+        defineTakePhotoButtonListener();
         defineContinueButtonListener();
     }
 
@@ -76,6 +88,21 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
+    private void defineTakePhotoButtonListener() {
+        btTakePhoto.setOnClickListener(view -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Record photo")
+                    .setMessage("Do you want to take a photo to remember your record?")
+                    .setNegativeButton("Cancel", (dialogInterface, which) -> {
+                        builder.create().cancel();
+                    })
+                    .setPositiveButton("Confirm", (dialogInterface, which) -> {
+                        takePhoto();
+                    });
+            builder.create().show();
+        });
+    }
+
     private void showAnswer() {
         redBallsResult = getIntent().getStringExtra("redBallsResult");
         greenBallsResult = getIntent().getStringExtra("greenBallsResult");
@@ -85,6 +112,7 @@ public class ResultActivity extends AppCompatActivity {
         tvRedBallsAnswer.setVisibility(View.VISIBLE);
         tvGreenBallsAnswer.setVisibility(View.VISIBLE);
         tvBlueBallsAnswer.setVisibility(View.VISIBLE);
+        btTakePhoto.setVisibility(View.VISIBLE);
         btContinue.setVisibility(View.VISIBLE);
 
         String redBallsAnswer = etRedBallsResult.getText().toString();
@@ -109,6 +137,34 @@ public class ResultActivity extends AppCompatActivity {
         tvRedBallsAnswer.setText(redBallsMessage.replace("x", redBallsAnswer));
         tvGreenBallsAnswer.setText(greenBallsMessage.replace("x", greenBallsAnswer));
         tvBlueBallsAnswer.setText(blueBallsMessage.replace("x", blueBallsAnswer));
+    }
+
+    private void takePhoto() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            ivRecordPhoto.setImageBitmap(imageBitmap);
+        }
+        ivRecordPhoto.setVisibility(View.VISIBLE);
+        tvAnswerMessage.setVisibility(View.GONE);
+        tvRedBallsAnswer.setVisibility(View.GONE);
+        tvGreenBallsAnswer.setVisibility(View.GONE);
+        tvBlueBallsAnswer.setVisibility(View.GONE);
+        btTakePhoto.setText("Change photo");
+        if (tvCorrectAnswer.getVisibility() == View.VISIBLE) {
+            tvCorrectAnswer.setText("I got it!");
+        } else {
+            tvWrongAnswer.setText("I tried...");
+        }
     }
 
 }

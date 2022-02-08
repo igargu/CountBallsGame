@@ -28,19 +28,17 @@ public class GameActivity extends AppCompatActivity {
     private TextView tvReadyMessage;
     private int numBalls;
     private String[] colorBalls = {"#FF3333", "#07DC07", "#1C86FD"};
-
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        // attributeSet = new AttributeSet();
-
         initialize();
     }
 
     private void initialize() {
+        mediaPlayer = MediaPlayer.create(this, R.raw.game_level_sound);
         readyMessage();
     }
 
@@ -52,9 +50,9 @@ public class GameActivity extends AppCompatActivity {
         // Mensaje al empezar el juego
         tvReadyMessage = findViewById(R.id.tvReadyMessage);
         animation = ObjectAnimator.ofFloat(tvReadyMessage, "translationY", finalPosition);
-        animation.setDuration(5000);
+        animation.setDuration(3000);
         animation.start();
-        gameLevelSound();
+        mediaPlayer.start();
         // Al terminar el mensaje
         animation.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -115,7 +113,7 @@ public class GameActivity extends AppCompatActivity {
             public void run() {
                 finishGame(String.valueOf(finalRedBalls), String.valueOf(finalGreenBalls), String.valueOf(finalBlueBalls));
             }
-        }, 5000);
+        }, 10000);
 
     }
 
@@ -207,6 +205,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void finishGame(String redBalls, String greenBalls, String blueBalls) {
+        mediaPlayer.stop();
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra("redBallsResult", redBalls);
         intent.putExtra("greenBallsResult", greenBalls);
