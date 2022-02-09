@@ -80,7 +80,6 @@ public class GameActivity extends AppCompatActivity {
         int redBalls = 0, greenBalls = 0, blueBalls = 0;
 
         // Empezamos el juego
-        //gameLevelSound();
 
         for (int i = 0; i < numBalls; i++) {
 
@@ -122,7 +121,6 @@ public class GameActivity extends AppCompatActivity {
         int redBalls = 0, greenBalls = 0, blueBalls = 0;
 
         // Empezamos el juego
-        //gameLevelSound();
 
         for (int i = 0; i < numBalls; i++) {
 
@@ -163,7 +161,6 @@ public class GameActivity extends AppCompatActivity {
         int redBalls = 0, greenBalls = 0, blueBalls = 0;
 
         // Empezamos el juego
-        //gameLevelSound();
 
         for (int i = 0; i < numBalls; i++) {
 

@@ -25,6 +25,7 @@ public class ResultActivity extends AppCompatActivity {
     private Button btCheckAnswer, btTakePhoto, btContinue;
     private String redBallsResult, greenBallsResult, blueBallsResult;
     private ImageView ivRecordPhoto;
+    private MediaPlayer mediaPlayer;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
 
@@ -36,6 +37,11 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void initialize() {
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.waiting_sound);
+        mediaPlayer.start();
+        mediaPlayer.setLooping(true);
+
         tvResult = findViewById(R.id.tvResult);
         tvRedBalls = findViewById(R.id.tvRedBalls);
         tvGreenBalls = findViewById(R.id.tvGreenBalls);
@@ -85,6 +91,8 @@ public class ResultActivity extends AppCompatActivity {
         btContinue.setOnClickListener(v -> {
             Toast.makeText(this, R.string.finishToast, Toast.LENGTH_SHORT).show();
             finish();
+            Intent intent = new Intent(this, MenuActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -104,6 +112,9 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void showAnswer() {
+
+        mediaPlayer.pause();
+
         redBallsResult = getIntent().getStringExtra("redBallsResult");
         greenBallsResult = getIntent().getStringExtra("greenBallsResult");
         blueBallsResult = getIntent().getStringExtra("blueBallsResult");
