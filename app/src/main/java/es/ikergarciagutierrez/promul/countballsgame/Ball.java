@@ -7,35 +7,35 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+/**
+ * Clase que dibuja la bola
+ */
 public class Ball extends View {
 
-    /**
-     * Campos de la clase
-     */
-    private Paint paint; // Objeto paint para dibujar el circulo
+    // Variables de la clase
+    private Paint paint; // Objeto paint para dibujar la bola
 
-    private static final int RADIO = 65; // Radio del circulo
+    private static final int RADIO = 65; // Radio de la bola
 
-    private int centroX; // Posición en el eje X del círculo
-    private int centroY; // Posición en el eje Y del círculo
+    private int centroX; // Posición en el eje X de la bola
+    private int centroY; // Posición en el eje Y de la bola
 
-    private int velocidadX; // Velocidad en el eje X
-    private int velocidadY; // Velocidad en el eje Y
+    private int velocidadX; // Velocidad en el eje X de la bola
+    private int velocidadY; // Velocidad en el eje Y de la bola
 
     /**
-     * Constructor para el circulo
+     * Constructor para dibujar la bola
      *
      * @param context Contexto
-     * @param attrs
+     * @param attrs   Atributos de la bola
      */
     public Ball(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         paint = new Paint();
     }
 
     /**
-     * Cambiar tamaño de la pelota
+     * Método que ambia el tamaño de la bola
      *
      * @param w    Ancho
      * @param h    Altura
@@ -48,17 +48,28 @@ public class Ball extends View {
         centroY = h / 2;
     }
 
+    /**
+     * Método que pinta la bola a partir de un color en hexadecimal
+     *
+     * @param color String con el color en hexadecimal
+     */
     public void setColor(String color) {
         paint.setColor(Color.parseColor(color));
     }
 
+    /**
+     * Método que establece la velocidad de la bola
+     *
+     * @param ejeX Velocidad de la bola en el eje X
+     * @param ejeY Velocidad de la bola en el eje Y
+     */
     public void setVelocidad(int ejeX, int ejeY) {
         velocidadX = ejeX;
         velocidadY = ejeY;
     }
 
     /**
-     * Dibujamos la pelota
+     * Método que dibuja la bola
      *
      * @param canvas Objeto canvas
      */
@@ -71,11 +82,11 @@ public class Ball extends View {
         centroX += velocidadX;
         centroY += velocidadY;
 
-        // Límites de pantalla
+        // Límite de la pantalla
         int limiteDerecha = w - RADIO;
         int limiteInferior = h - RADIO;
 
-        // Comprobar si invertir si llegamos al límite
+        // Comprobamos si invertimos la dirección al llegar al límite de la pantalla
         if (centroX >= limiteDerecha) {
             centroX = limiteDerecha;
             velocidadX *= -1;
@@ -93,6 +104,7 @@ public class Ball extends View {
             velocidadY *= -1;
         }
 
+        // Dibujamos la bola y le establecemos el delay
         canvas.drawCircle(centroX, centroY, RADIO, paint);
         postInvalidateDelayed(1);
 
